@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Child = (name) => {
+const Child = (props) => {
   return (
-    <div>Child {name}</div>
+    <div>Child {props.name}</div>
   )
 }
 

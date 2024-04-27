@@ -14,7 +14,7 @@ function App() {
       
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Parent />}></Route>
+          <Route path='/' element={<EmplyeeList />}></Route>
           <Route path="/create" element={<EmplyeeCreate />}></Route>
           <Route path="/update/:empid" element={<EmplyeeUpdate />}></Route>
           <Route path="/detail/:empid" element={<EmplyeeDetail />}></Route>
