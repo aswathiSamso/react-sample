@@ -10863,3 +10863,9 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     margin-left: -15rem;
   }
 }
+
+.ui.page .visible{
+  margin-left: 30%;
+  margin-top: 10%;
+  height: 300px;
+}

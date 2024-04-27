@@ -14,6 +14,7 @@ import {
 } from "semantic-ui-react";
 import { deleteEmployee, getEmployeeList } from "../../service/Api";
 
+import EmpProfileModal from "./EmpProfileModal";
 import React from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +22,9 @@ import { useState } from "react";
 
 const EmplyeeList = () => {
   const [employees, setEmployees] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [empl, setEmpl] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,12 +37,15 @@ const EmplyeeList = () => {
     navigate("/update/" + id);
   };
   const deletUser = (id) => {
-    deleteEmployee(id).then(()=>{
-      alert("Deleted!")
+    deleteEmployee(id).then(() => {
+      alert("Deleted!");
       window.location.reload(true);
-    })
+    });
   };
-
+  const gotoView = (emp) => {
+    setEmpl(emp);
+    setShowModal(true);
+  };
   const listItems = employees?.map((item) => (
     <TableRow>
       <TableCell>{item.code}</TableCell>
@@ -48,17 +55,32 @@ const EmplyeeList = () => {
       <TableCell>{item.age}</TableCell>
       <TableCell>{item.department}</TableCell>
       <TableCell>
-        <button className="btn btn-primary" onClick={() => gotoUpdate(item.id)}>Edit</button>
-        {" "}
-        <button className="btn btn-secondary" onClick={() => deletUser(item.id)}>Delete</button>
+        <button className="btn btn-primary" onClick={() => gotoUpdate(item.id)}>
+          Edit
+        </button>{" "}
+        <button
+          className="btn btn-secondary"
+          onClick={() => deletUser(item.id)}
+        >
+          Delete
+        </button>{" "}
+        <button className="btn btn-secondary" onClick={() => gotoView(item)}>
+          View
+        </button>
       </TableCell>
-     
     </TableRow>
   ));
 
   return (
     <>
       <div class="container-fluid p-10">
+        <EmpProfileModal
+          employee={empl}
+          showModal={showModal}
+          handleCloseModal={() => {
+            setShowModal(false);
+          }}
+        />
         <h1 class="mt-4">Employees</h1>
 
         {employees?.length > 0 ? (

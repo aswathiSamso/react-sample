@@ -1,32 +1,44 @@
-import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import {
+  Button,
+  Header,
+  Modal,
+  ModalActions,
+  ModalContent,
+  ModalDescription,
+  ModalHeader,
+} from "semantic-ui-react";
+import React, { useState } from "react";
 
 const EmpProfileModal = ({ employee, showModal, handleCloseModal }) => {
-    return (
-        <Modal show={showModal} onHide={handleCloseModal}>
-            <Modal.Header closeButton>
-                <Modal.Title>Employee Profile</Modal.Title>
-            </Modal.Header>
-            <Modal.Body style={{ "textAlign": "left" }}>
-                {employee && (
-                    <div>
-                        <p>Employee ID: {employee.id}</p>
-                        <p>Name: {employee.name}</p>
-                        <p>Department: {employee.department}</p>
-                        <p>Age : {employee.age}</p>
-                        <p>Gender : {employee.gender}</p>
-                        <p>Salary: {employee.salary}</p>
-                        <p>Years Of Experience: {employee.yearsOfExperience}</p>
-
-
-                    </div>
-                )}
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
-            </Modal.Footer>
-        </Modal>
-    );
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Modal
+        onClose={handleCloseModal}
+        open={showModal}
+        
+      >
+        <ModalHeader>Employee Detail</ModalHeader>
+        <ModalContent>
+          <ModalDescription>
+            {employee && (
+              <div>
+                <p>Employee Code: {employee.code}</p>
+                <p>Name: {employee.firstName} {employee.lastName}</p>
+                <p>Department: {employee.department}</p>
+                <p>Age : {employee.age}</p>
+              </div>
+            )}
+          </ModalDescription>
+        </ModalContent>
+        <ModalActions>
+          <Button color="black" onClick={handleCloseModal}>
+            Close
+          </Button>
+        </ModalActions>
+      </Modal>
+    </>
+  );
 };
 
 export default EmpProfileModal;
